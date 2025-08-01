@@ -2,406 +2,179 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sayang Shop 🛒💕</title>
-  <style id="dynamicTheme">
-    body {
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Girlfriend's Day Sayang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: #fff0f6;
-      font-family: 'Georgia', serif;
-      overflow-x: hidden;
+      padding: 0;
     }
-
-    .navbar {
+    body {
+      font-family: 'Great Vibes', cursive;
+      background: linear-gradient(135deg, #ffe6f0, #ffccdd);
+      color: #770038;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .heart {
+      position: fixed;
+      font-size: 1.5rem;
+      animation: floatUp 6s infinite ease-in;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+    .snap-ui {
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 390px;
+      height: 844px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .top-bar {
+      background-color: #ff99bb;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+    }
+    .screen {
+      flex: 1;
+      background: #fff0f5;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+    }
+    .screen.active {
+      display: flex;
+    }
+    .btn {
+      background: #ff6699;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-style: italic;
+      font-size: 1.2rem;
+      font-family: 'Comic Sans MS', cursive;
+      border: none;
+    }
+    .love-letter {
+      padding: 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #660033;
+      font-style: italic;
+      overflow-y: auto;
+      height: calc(100% - 120px);
+      display: none;
+    }
+    .bottom-nav {
+      height: 60px;
+      background: #ffe0ea;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background: #d6336c;
-      color: white;
-      padding: 15px 0;
-      font-size: 1.2em;
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 0.9rem;
+      color: #990055;
     }
-
-    .navbar div {
+    .nav-item {
       cursor: pointer;
-    }
-
-    h1, h2 {
-      font-size: 2.5em;
-      margin: 30px 0 10px;
-      color: #d6336c;
-      text-align: center;
-    }
-
-    .section {
-      margin: 30px auto;
-      text-align: center;
-    }
-
-    button {
-      font-family: 'Georgia', serif;
-      font-size: 1.5em;
-      margin: 20px;
-      padding: 25px 50px;
-      background: #fff;
-      border: 3px solid #d6336c;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-    }
-
-    button:hover:not([disabled]) {
-      background: #d6336c;
-      color: #fff;
-    }
-
-    button[disabled] {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .price {
-      font-size: 1.8em;
-      color: #d6336c;
-      margin-bottom: 20px;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .hint {
-      font-size: 0.9em;
-      color: grey;
-      margin-top: 5px;
-    }
-
-    .back-button {
-      margin-top: 20px;
-      background: #d6336c;
-      color: #fff;
-    }
-
-    .popup, .cart-popup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #d6336c;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      z-index: 10;
-    }
-
-    .popup {
-      display: none;
-    }
-
-    .cart-popup {
-      width: 250px;
-      text-align: left;
-      display: none;
-    }
-
-    .strike {
-      text-decoration: line-through;
-      color: grey;
-      margin-right: 10px;
-    }
-
-    .receipt {
-      background: white;
-      display: inline-block;
-      text-align: left;
-      padding: 30px;
-      border: 2px solid #d6336c;
-      border-radius: 15px;
-      margin-top: 30px;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .receipt h3 {
-      text-align: center;
-      color: #d6336c;
-    }
-
-    .progress-container {
-      width: 80%;
-      background: #ddd;
-      border-radius: 20px;
-      margin: 20px auto;
-    }
-
-    .progress-bar {
-      width: 100%;
-      background: #d6336c;
-      height: 30px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-      line-height: 30px;
-      font-weight: bold;
-    }
-
-    /* Floating hearts */
-    .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Love_Heart_SVG.svg/1200px-Love_Heart_SVG.svg.png') no-repeat center;
-      background-size: contain;
-      animation: float 10s linear infinite;
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(100vh) translateX(0); }
-      100% { transform: translateY(-20vh) translateX(50px); }
-    }
-
-    .welcome {
-      margin-top: 100px;
-    }
-
-    .welcome h1 {
-      font-size: 3em;
-      color: #ff69b4;
-    }
-
-    .welcome p {
-      font-size: 1.5em;
-      color: #d6336c;
     }
   </style>
 </head>
 <body>
+  <div class="snap-ui">
+    <div class="top-bar">SnapSayang 💕</div>
 
-  <div class="navbar" style="display:none;">
-    <div>🏠 Home</div>
-    <div>🛍️ Categories</div>
-    <div onclick="toggleCart()">🛒 Cart</div>
-    <div>👤 Account</div>
-    <div>💳 Checkout</div>
-  </div>
-
-  <div class="cart-popup" id="cartPopup">
-    <strong>Your Cart:</strong>
-    <div id="cartDetails">Empty</div>
-  </div>
-
-  <!-- Welcome page -->
-  <div class="section welcome" id="welcomePage">
-    <h1>Welcome to Sayang Shop 💖</h1>
-    <p>Where everything is made with love just for you ✨</p>
-    <button onclick="startShopping()">Start! 💕</button>
-  </div>
-
-  <!-- Step 0: Select main item -->
-  <div class="section" id="step0" style="display: none;">
-    <h2>Step 1: Pick Your Main Item</h2>
-    <button onclick="pickMain('Pretty Shoes Iman Pilih')">Pretty Shoes Iman Pilih 👠</button>
-    <button onclick="pickMain('Unconditional Love')">Unconditional Love 💖</button>
-    <button onclick="pickMain('Unlimited Hugs and Kisses')">Unlimited Hugs & Kisses 🤗😘</button>
-  </div>
-
-  <!-- Step 1: Select colour -->
-  <div class="section" id="step1" style="display: none;">
-    <h2>Step 2: Pick Your Shoe Colour</h2>
-    <div class="price">Total Price: RM250</div>
-    <button onclick="pickColour('Matcha Strawberry')">Matcha Strawberry 🍵🍓</button>
-    <button onclick="pickColour('Pink Crush')">Pink Crush 💗</button>
-    <button onclick="pickColour('Mushy Maroon')">Mushy Maroon ❤️‍🔥</button>
-    <button class="back-button" onclick="backToStep0()">⬅️ Back</button>
-  </div>
-
-  <!-- Step 2: Select size -->
-  <div class="section" id="step2" style="display: none;">
-    <h2>Step 3: Pick Your Size</h2>
-    <button onclick="pickSize('UK5 / EU36')">UK5 / EU38</button>
-    <button onclick="pickSize('UK6 / EU37')">UK6 / EU39</button>
-    <button onclick="pickSize('UK7 / EU38')">UK7 / EU40</button>
-    <button onclick="pickSize('UK8 / EU39')">UK8 / EU41</button>
-    <button class="back-button" onclick="backToStep1()">⬅️ Back</button>
-  </div>
-
-  <!-- Step 3: Checkout -->
-  <div class="section" id="step3" style="display: none;">
-    <h2>Step 4: Checkout</h2>
-    <div class="price">Total Price: <span id="originalPrice">RM250</span> <span id="finalPrice"></span></div>
-    <input type="text" id="promo" placeholder="Enter promo code" oninput="checkCheckoutStatus()">
-    <div class="hint">Hint: what we call each other ❤️</div>
-    <button onclick="applyPromo()">Apply Promo</button>
-
-    <div id="loveTax" style="margin-top: 20px; font-size:1.2em; display:none;">
-      ❤️ Love Tax: HUGSSS 🤗
+    <!-- Initial Welcome Screen -->
+    <div class="screen active" id="screen0">
+      <h2 style="font-size: 1.8rem;">Happy Girlfriend’s Day Sayang! 💖</h2>
+      <div style="font-size: 1.2rem; margin-top: 10px;">Balqish Syafiyyah, you ready to feel loved? >///<</div>
+      <button class="btn" onclick="nextScreen('screen0','screen1')">Start 💌</button>
     </div>
 
-    <div style="margin-top:30px;">
-      <button id="pay1" onclick="selectPayment('HUGS')">HUGS 🤗</button>
-      <button id="pay2" onclick="selectPayment('KISSES')">KISSES 😘</button>
-      <button id="pay3" onclick="selectPayment('BITES')">BITES 😈</button>
+    <div class="screen" id="screen1">
+      <div>Are you sure you want to continue? >-<</div>
+      <button class="btn" onclick="nextScreen('screen1','screen2')">Yes 💖</button>
     </div>
 
-    <button id="checkoutBtn" style="margin-top:30px;" onclick="checkout()" disabled>✅ Checkout</button>
-    <button class="back-button" onclick="backToStep2()">⬅️ Back</button>
-  </div>
+    <div class="screen" id="screen2">
+      <div>Are you sure you want to marry me? (｡♥‿♥｡)</div>
+      <button class="btn" onclick="nextScreen('screen2','screen3')">Absolutely <3</button>
+    </div>
 
-  <!-- Confirmation -->
-  <div class="section" id="confirmation" style="display: none;">
-    <div class="receipt">
-      <h3>🧾 Sayang Shop Receipt</h3>
-      <p><strong>Order Number:</strong> <span id="orderNum"></span></p>
-      <p><strong>Item:</strong> <span id="itemSummary"></span></p>
-      <p><strong>Free Gift 1:</strong> Hugs 🤗</p>
-      <p><strong>Free Gift 2:</strong> Kisses 😘</p>
-      <p><strong>Payment Method:</strong> <span id="paymentSummary"></span></p>
-      <p><strong>Total:</strong> <span id="totalSummary"></span></p>
-      <div class="progress-container">
-        <div class="progress-bar">Your order is on the way! 🚚💨</div>
-      </div>
-      <p style="text-align:center;">Delivery by Red Bull Racing 🏎️💨, deliveryman Max Verstappen 👨‍✈️</p>
-      <p style="text-align:center;">Thank you for shopping with Sayang Shop! 💖</p>
+    <div class="screen" id="screen3">
+      <div class="btn" onclick="showLetter()">Tap to reveal your love letter 💌</div>
+    </div>
+
+    <div class="love-letter" id="letter">
+      My dearest Sayang, Balqish Syafiyyah,
+      <br><br>
+      Since May 2024, and even the months before when we were just two souls slowly gravitating towards each other, you’ve always been special to me. Even when we were just friends, you were already becoming my person. And now that you’re mine… you’ve been nothing short of the most loving, caring, beautiful soul I could ever ask for.
+      <br><br>
+      You’ve shown me what real love is — through your patience, your constant check-ins, your warm words, your little efforts that mean the whole world to me. You’ve loved me in ways I didn’t even know I needed. You’ve been my calm, my home, my strength.
+      <br><br>
+      And I promise you this: I will always give effort to become a better man — not just for you, but for us. Our end goal will always be our marriage, our family, our forever. I know one day we’ll have our own home filled with laughter, with love, and with little versions of us running around, calling you mommy.
+      <br><br>
+      No matter how long it takes, no matter how far the road — I will walk it all with you, hand in hand, side by side.
+      <br><br>
+      Happy Girlfriend’s Day, Sayangg. You’re the best girlfriend in the world. (づ｡◕‿‿◕｡)づ
+      <br><br>
+      Love always, <br>
+      Your sayang 💖
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item">📷 Camera</div>
+      <div class="nav-item">💬 Chats</div>
+      <div class="nav-item">👤 Profile</div>
     </div>
   </div>
-
-  <div class="popup" id="popupBox">Item added to cart 🛒</div>
 
   <script>
-    let choice = {};
-    let price = 250;
-    let promoApplied = false;
-    let paymentSelected = false;
-
-    function startShopping() {
-      document.getElementById('welcomePage').style.display = 'none';
-      document.querySelector('.navbar').style.display = 'flex';
-      document.getElementById('step0').style.display = 'block';
+    function nextScreen(current, next) {
+      document.getElementById(current).classList.remove('active');
+      document.getElementById(next).classList.add('active');
     }
-
-    function pickMain(item) {
-      choice.main = item;
-      updateCart();
-      if(item.includes('Shoes')){
-        document.getElementById('step0').style.display = 'none';
-        document.getElementById('step1').style.display = 'block';
-      } else {
-        alert(`You selected ${item}!`);
-      }
-      document.getElementById('cartPopup').style.display = 'block';
+    function showLetter() {
+      const screens = document.querySelectorAll('.screen');
+      screens.forEach(screen => screen.classList.remove('active'));
+      document.getElementById('letter').style.display = 'block';
     }
-
-    function pickColour(colour) {
-      choice.colour = colour;
-      changeTheme(colour);
-      updateCart();
-      document.getElementById('step1').style.display = 'none';
-      document.getElementById('step2').style.display = 'block';
-    }
-
-    function pickSize(size) {
-      choice.size = size;
-      updateCart();
-      document.getElementById('popupBox').style.display = 'block';
-      setTimeout(() => { document.getElementById('popupBox').style.display = 'none'; }, 2000);
-      document.getElementById('step2').style.display = 'none';
-      document.getElementById('step3').style.display = 'block';
-      document.getElementById('finalPrice').innerText = '';
-    }
-
-    function applyPromo() {
-      const code = document.getElementById('promo').value;
-      if(code.toUpperCase() === 'SAYANG') {
-        promoApplied = true;
-        document.getElementById('originalPrice').classList.add('strike');
-        document.getElementById('finalPrice').innerText = 'FREE';
-        document.getElementById('loveTax').style.display = 'block';
-        checkCheckoutStatus();
-      } else {
-        alert('Invalid promo code 😢');
-      }
-    }
-
-    function selectPayment(payment) {
-      choice.payment = payment;
-      paymentSelected = true;
-      updateCart();
-      alert(`You selected ${payment} as payment method.`);
-      checkCheckoutStatus();
-    }
-
-    function checkCheckoutStatus() {
-      const checkoutBtn = document.getElementById('checkoutBtn');
-      checkoutBtn.disabled = !(promoApplied || paymentSelected);
-    }
-
-    function checkout() {
-      document.getElementById('step3').style.display = 'none';
-      document.getElementById('confirmation').style.display = 'block';
-      const total = promoApplied ? 'FREE (Love Tax: HUGSSS 🤗)' : `RM${price}`;
-      const orderNum = 'SAY' + Math.floor(Math.random()*90000 + 10000);
-      document.getElementById('orderNum').innerText = orderNum;
-      document.getElementById('itemSummary').innerText = choice.main.includes('Shoes') ? choice.colour + ', size ' + choice.size : choice.main;
-      document.getElementById('paymentSummary').innerText = choice.payment || 'Not Selected';
-      document.getElementById('totalSummary').innerText = total;
-      document.getElementById('cartPopup').style.display = 'none';
-    }
-
-    function toggleCart() {
-      const cart = document.getElementById('cartPopup');
-      cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function updateCart() {
-      let details = '';
-      if(choice.main) details += 'Main Item: ' + choice.main + '<br>';
-      if(choice.colour) details += 'Colour: ' + choice.colour + '<br>';
-      if(choice.size) details += 'Size: ' + choice.size + '<br>';
-      if(choice.payment) details += 'Payment: ' + choice.payment + '<br>';
-      document.getElementById('cartDetails').innerHTML = details || 'Empty';
-    }
-
-    function backToStep0() {
-      document.getElementById('step1').style.display = 'none';
-      document.getElementById('step0').style.display = 'block';
-    }
-
-    function backToStep1() {
-      document.getElementById('step2').style.display = 'none';
-      document.getElementById('step1').style.display = 'block';
-    }
-
-    function backToStep2() {
-      document.getElementById('step3').style.display = 'none';
-      document.getElementById('step2').style.display = 'block';
-    }
-
-    function changeTheme(colour) {
-      let theme = '';
-      if(colour === 'Matcha Strawberry') {
-        theme = `body { background: #f0fff0; } .navbar, h1, .back-button, .progress-bar { background: #77dd77; } button { border-color: #77dd77; } .price { color: #77dd77; } .receipt h3 { color: #77dd77; }`;
-      } else if(colour === 'Pink Crush') {
-        theme = `body { background: #ffe6f0; } .navbar, h1, .back-button, .progress-bar { background: #ff69b4; } button { border-color: #ff69b4; } .price { color: #ff69b4; } .receipt h3 { color: #ff69b4; }`;
-      } else if(colour === 'Mushy Maroon') {
-        theme = `body { background: #fff0f0; } .navbar, h1, .back-button, .progress-bar { background: #800000; } button { border-color: #800000; } .price { color: #800000; } .receipt h3 { color: #800000; }`;
-      }
-      document.getElementById('dynamicTheme').innerHTML += theme;
-    }
-
-    // Floating hearts
-    for (let i = 0; i < 20; i++) {
-      let heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
-      heart.style.animationDelay = (Math.random() * 5) + 's';
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💗';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
       document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
     }
+    setInterval(createHeart, 400);
   </script>
-
 </body>
 </html>
